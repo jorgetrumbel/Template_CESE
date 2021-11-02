@@ -21,14 +21,14 @@
 
 % El nombre del director y co-director, se puede usar el cualquier lugar del documento con el comando \supname y \cosupname y \pertesupname y \pertecosupname
 \director{Gabriel Gavinowich}
-\pertenenciaDirector{} 
-% FIXME:NO IMPLEMENTADO EL CODIRECTOR ni su pertenencia
+\pertenenciaDirector{FIUBA} 
+
 \codirector{} % para que aparezca en la portada se debe descomentar la opción codirector en el documentclass
 \pertenenciaCoDirector{}
 
 % Nombre del cliente, quien va a aprobar los resultados del proyecto, se puede usar con el comando \clientename y \empclientename
-\cliente{Nombre del cliente}
-\empresaCliente{Empresa del cliente}
+\cliente{Alejandro Virgillo}
+\empresaCliente{A3 Engineering}
 
 % Nombre y pertenencia de los jurados, se pueden usar el cualquier lugar del documento con el comando \jurunoname, \jurdosname y \jurtresname y \perteunoname, \pertedosname y \pertetresname.
 \juradoUno{Nombre y Apellido (1)}
@@ -38,9 +38,9 @@
 \juradoTres{Nombre y Apellido (3)}
 \pertenenciaJurTres{pertenencia (3)}
  
-\fechaINICIO{21 de Octubre de 2021}		%Fecha de inicio de la cursada de GdP \fechaInicioName
-\fechaFINALPlan{18 de junio de 2021} 	%Fecha de final de cursada de GdP
-\fechaFINALTrabajo{15 de mayo de 2022}	%Fecha de defensa pública del trabajo final
+\fechaINICIO{21 de octubre de 2021}		%Fecha de inicio de la cursada de GdP \fechaInicioName
+\fechaFINALPlan{9 de diciembre de 2021} 	%Fecha de final de cursada de GdP
+\fechaFINALTrabajo{9 de octubre de 2022}	%Fecha de defensa pública del trabajo final
 
 
 \begin{document}
@@ -69,7 +69,7 @@
 \rowcolor[HTML]{C0C0C0} 
 Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios realizados} & Fecha      \\ \hline
 0      & Creación del documento                                 &\fechaInicioName \\ \hline
-%1      & Se completa hasta el punto 4 inclusive                 & dd/mm/aaaa \\ \hline
+1      & Se completa hasta el punto 5 inclusive                 & 30 de octubre de 2021 \\ \hline
 %2      & Se completa hasta el punto 7 inclusive
 %		  Se puede agregar algo más \newline
 %		  En distintas líneas \newline
@@ -92,7 +92,7 @@ Buenos Aires, \fechaInicioName
 
 \vspace{2cm}
 
-Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en \textcolor{red}{la implementación de un prototipo de un sistema de control de temperatura de un calefón}, y tendrá un presupuesto preliminar estimado de \textcolor{red}{600} hs de trabajo y \textcolor{red}{\$XXX}, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
+Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en la implementación de una interfaz que permita configurar y relevar información de servomotores conectados a través de una red CAN, y tendrá un presupuesto preliminar estimado de 600 hs de trabajo y U\$1000, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
 
 Se adjunta a esta acta la planificación inicial.
 
@@ -115,57 +115,28 @@ Se adjunta a esta acta la planificación inicial.
 \section{1. Descripción técnica-conceptual del proyecto a realizar}
 \label{sec:descripcion}
 
+El proyecto busca obtener un dispositivo que permita programar y supervisar servomotores conectados dentro de una red \textbf{CAN} (\textit{Controller Area Network}), así como relevar información de estos. El resultado debe ser de carácter industrial, por lo que se prioriza su robustez para poder operar en planta y debe contar con una interfaz de usuario.
 
-\begin{consigna}{red} % El bloque "consigna" se usa para poner texto en rojo y dar una pequeña ayuda sobre cómo completar la sección
+Un servomotor es un tipo de motor eléctrico al que se le pueden controlar distintas variables de funcionamiento. Entre ellas están la posición, la velocidad, la aceleración y el torque. La solución buscada se vincula con un proyecto previo de la organización en el que se desarrolló un sistema embebido capaz de servocontrolar motores del tipo paso a paso o \textit{steppers}. Este sistema también cuenta con un puerto de comunicación \textbf{CAN}, que se agregó originalmente para poder programar y supervisar al controlador de una forma cómoda y robusta a través de una interfaz externa. El proyecto actual busca lograr las funcionalidades de dicha interfaz.  Actualmente, varios de estos motores, junto con las placas controladoras mencionadas, se encuentran en funcionamiento en la planta de la empresa \textbf{Cambre}, realizando diversos tipos de actuaciones mecánicas en líneas de manufactura. El problema que este proyecto afronta es la dificultad para alterar los parametros de control de dichos motores y la imposibilidad de supervisar el estado de funcionamiento de estos. Se elige el protocolo de comunicación \textbf{CAN} debido a su robustez y amplia utilización en el marco industrial.
 
-El objetivo es que el lector en una o dos páginas entienda de qué se trata el proyecto y cuáles son sus desafíos, su motivación y su importancia.
+También dentro del marco de este proyecto se encuentra el desarrollo de la estructura de mensajes a emplear entre los dispositivos conectados a través de la red \textbf{CAN}. Esta debe permitir al controlador supervisar las distintas variables de interés de cada uno de los motores conectados, así como realizar cambios en las configuraciones.
 
-Se debe destacar claramente cuál es el valor que agrega el proyecto a realizar. ``El presente proyecto se destaca especialmente por incorporar tal cosa... Esto lo diferencia de otros sistemas similares en que ...''
+Por otro lado, el dispositivo debe tener entradas y salidas discretas, eléctricamente aisladas y en otros niveles de tensión que permitan envíar señales a un \textbf{PLC} (\textit{Programmable Logic Controller}). Estas señales se emplearán para indicar posibles errores al controlador, así como para recibir ciertas instrucciones específicas de este.
 
-Puede ser útil incluir en esta sección la respuesta a alguna de estas preguntas:
+El equipo debe contar también con un display y una botonera, conformando el aspecto \textbf{HMI} (\textit{Human Machine Interface}) de la solución. Esto permite a un usuario operarlo y revisar el correcto funcionamiento del sistema.
 
-\begin{itemize}
-	\item ¿Cómo se vincula este proyecto con la misión de la organización?
-	\item ¿Cómo se inserta este proyecto en el modelo de negocio de la organización?
-	\item ¿Ayuda a la explicación si se incluye un lienzo Canvas del Modelo de Negocio?
-	\item ¿En qué estado del ciclo de vida está el producto que se desea reemplazar o mejorar?
-	\item ¿Cuáles son las necesidades que debe satisfacer?
-	\item ¿Por dónde pasa la innovación?
-\end{itemize}
-
-La descripción técnica-conceptual \textbf{debe incluir al menos un diagrama en bloques del sistema} y una frase como la siguiente: ``En la Figura \ref{fig:diagBloques} se presenta el diagrama en bloques del sistema. Se observa que...''. Luego recién más abajo de haber puesto esta frase, se pone la figura. La regla es que las figuras nunca pueden ir antes de ser mencionadas en el texto, porque sino el lector no entiende por qué de pronto aparece una figura.
-
-%\vspace{25px}
+En la \textbf{Figura 1} se muestra, a modo de ejemplo, un diagrama en bloques del sistema. El proyecto abarca el diseño y fabricación de la parte que aparece denominada como controlador y su interacción con los demás bloques. También notar que en el bus \textbf{CAN} pueden haber conectados más de 1 servomotor. Cada uno de estos tendrá una de las placas controladoras descriptas previamente.
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=.5\textwidth]{./Figuras/diagBloques.png}
+\includegraphics[width=.8\textwidth]{./Figuras/CAN_Servo_controller.png}
 \caption{Diagrama en bloques del sistema}
 \label{fig:diagBloques}
 \end{figure}
 
-\vspace{25px}
-
-El tamaño de la tipografía en TODAS las figuras debe ser adecuado para que NO pase lo que ocurre acá, donde el lector debe esforzarse para poder leer el texto. Los colores usados en el diagrama deben ser adecuados, tal que ayuden a comprender mejor el diagrama, preferentemente en la gama de colores pastel.
-\end{consigna}
-
 
 \section{2. Identificación y análisis de los interesados}
 \label{sec:interesados}
-
-\begin{consigna}{red} 
-Nota: (borrar esto y todas las consignas en color rojo antes de entregar este documento).
- 
-Es inusual que una misma persona esté en más de un rol, incluso en proyectos chicos.
- 
-Si se considera que una persona cumple dos o más roles, entonces sólo dejarla en el rol más importante. Por ejemplo:
-
-\begin{itemize}
-\item Si una persona es Cliente pero también colabora u orienta, dejarla solo como Cliente.
-\item Si una persona es el Responsable, no debe ser colocado también como Miembro del equipo.
-\end{itemize}
-
-Pero en cambio sí es usual que el Cliente y el Auspiciante sean el mismo, por ejemplo.
 
 \begin{table}[ht]
 %\caption{Identificación de los interesados}
@@ -174,75 +145,64 @@ Pero en cambio sí es usual que el Cliente y el Auspiciante sean el mismo, por e
 \hline
 \rowcolor[HTML]{C0C0C0} 
 Rol           & Nombre y Apellido & Organización 	& Puesto 	\\ \hline
-Auspiciante   &                   &              	&        	\\ \hline
-Cliente       & \clientename      &\empclientename	&        	\\ \hline
-Impulsor      &                   &              	&        	\\ \hline
+Auspiciante   & \clientename      & \empclientename	&       Líder de proyecto 	\\ \hline
+Cliente       & \clientename      &\empclientename	&       Líder de proyecto 	\\ \hline
+Impulsor      &Sector de automatización                   &  Cambre            	&    -    	\\ \hline
 Responsable   & \authorname       & FIUBA        	& Alumno 	\\ \hline
-Colaboradores &                   &              	&        	\\ \hline
+Colaboradores &  Andres Battisti                 &             Cambre 	&   Jefe de Automatización     	\\ \hline
 Orientador    & \supname	      & \pertesupname 	& Director Trabajo final \\ \hline
-Equipo        & miembro1 \newline 
-				miembro2          &              	&        	\\ \hline
-Opositores    &                   &              	&        	\\ \hline
-Usuario final &                   &              	&        	\\ \hline
+Usuario final &     Sector de automatización          &Cambre              	& Técnicos        	\\ \hline
+Usuario final &     Sector de armado          &Cambre              	& Operarios        	\\ \hline
 \end{tabularx}
 \end{table}
 
-El Director suele ser uno de los Orientadores.
 
-No dejar celdas vacías; si no hay nada que poner en una celda colocar un signo ``-''.
-
-No dejar filas vacías; si no hay nada que poner en una fila entonces eliminarla.
-
-Es deseable listar a continuación las principales características de cada interesado.
- 
 Por ejemplo:
 \begin{itemize}
-	\item Auspiciante: es riguroso y exigente con la rendición de gastos. Tener mucho cuidado con esto.
-	\item Equipo: Juan Perez, suele pedir licencia porque tiene un familiar con una enfermedad. Planificar considerando esto.
-	\item Orientador: María Gómez va a poder ayudar mucho con la definición de los requerimientos.
+	\item Orientador: Gabriel Gavinowich, es especialista en sistemas embebidos y trabaja en protocolo CAN, será de gran ayuda en materias de este aspecto.
+	\item Colaborador: Andrés Battisti, es hábil en la coordinación de proyectos. Puede dar una mano con la implementación en planta.
+	\item Usuario final: Sería de ayuda consultar a los operarios del sector de automatización para determinar temas de uso y de calidad que puedan considerar deseable. Pueden dar pautas para requerimientos que pueden ser de utilidad.
 \end{itemize}
-
-\end{consigna}
-
 
 
 \section{3. Propósito del proyecto}
 \label{sec:proposito}
 
-\begin{consigna}{red}
-¿Por qué se hace el proyecto? ¿Qué se quiere lograr? 
-
-Se recomienda que sea solo un párrafo que empiece diciendo ``El propósito de este proyecto es...''.
-\end{consigna}
+El propósito de este proyecto es desarrollar un sistema embebido que actúe de interfaz para configurar y supervisar servomotores conectados a una red \textbf{CAN}.
 
 \section{4. Alcance del proyecto}
 \label{sec:alcance}
 
-\begin{consigna}{red}
-¿Qué se incluye y que no se incluye en este proyecto?
+El proyecto incluye:
 
-Se refiere al trabajo a hacer para entregar el producto o resultado especificado. 
+\begin{itemize}
+	\item Una interfaz de usuario que permite configurar y supervisar los servomotores conectados.
+	\item La estructura de mensajes que ha de transmitirse a través del bus \textbf{CAN}.
+	\item La inclusión de entradas y salidas eléctricamente aisladas para comunicación con un \textbf{PLC}.
+	\item La configuración de la red \textbf{CAN}.
+	\item El desarrollo y fabricación de una plaqueta que abarque al sistema.
+\end{itemize}
 
-Explicitar todo lo quede comprendido dentro del alcance del proyecto.
+El proyecto no incluye:
 
-Explicitar además todo lo que no quede incluido (``El presente proyecto no incluye...'')
-
-\end{consigna}
-
+\begin{itemize}
+	\item El acceso a los datos de funcionamiento de los servomotores de forma remota o el almacenamiento de estos en una memoria.
+	\item El desarrollo de las placas controladoras de los servomotores.
+	\item La implementación final en planta.
+\end{itemize}
 
 \section{5. Supuestos del proyecto}
 \label{sec:supuestos}
 
-\begin{consigna}{red}
-``Para el desarrollo del presente proyecto se supone que: ...''
+Para el desarrollo del presente proyecto se supone que:
 
 \begin{itemize}
-	\item Supuesto 1
-	\item Supuesto 2...
+	\item El dinero disponible será suficiente para la adquisición de los materiales requeridos.
+	\item Habrá stock de los componentes del sistema y no habrá problemas de importación. 
+	\item Las demoras para obtener los componentes no serán excesivas.
+	\item La relación con la empresa Cambre se mantendrá durante el transcurso del proyecto.
 \end{itemize}
 
-Por ejemplo, se podrían incluir supuestos respecto a disponibilidad de tiempo y recursos humanos y materiales, sobre la factibilidad técnica de distintos aspectos del proyecto, sobre otras cuestiones que sean necesarias para el éxito del proyecto como condiciones macroeconómicas o reglamentarias.
-\end{consigna}
 
 \section{6. Requerimientos}
 \label{sec:requerimientos}
