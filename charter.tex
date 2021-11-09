@@ -70,10 +70,8 @@
 Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios realizados} & Fecha      \\ \hline
 0      & Creación del documento                                 &\fechaInicioName \\ \hline
 1      & Se completa hasta el punto 5 inclusive                 & 30 de octubre de 2021 \\ \hline
-%2      & Se completa hasta el punto 7 inclusive
-%		  Se puede agregar algo más \newline
-%		  En distintas líneas \newline
-%		  Así                                                    & dd/mm/aaaa \\ \hline
+2      & Se completa hasta el punto 9 inclusive
+& 7 de noviembre de 2021 \\ \hline
 %3      & Se completa hasta el punto 11 inclusive                & dd/mm/aaaa \\ \hline
 %4      & Se completa el plan	                                 & dd/mm/aaaa \\ \hline
 \end{tabularx}
@@ -115,17 +113,17 @@ Se adjunta a esta acta la planificación inicial.
 \section{1. Descripción técnica-conceptual del proyecto a realizar}
 \label{sec:descripcion}
 
-El proyecto busca obtener un dispositivo que permita programar y supervisar servomotores conectados dentro de una red \textbf{CAN} (\textit{Controller Area Network}), así como relevar información de estos. El resultado debe ser de carácter industrial, por lo que se prioriza su robustez para poder operar en planta y debe contar con una interfaz de usuario.
+El proyecto busca obtener un dispositivo que permita programar y supervisar servomotores conectados dentro de una red CAN (\textit{Controller Area Network}), así como relevar información de estos. El resultado debe ser de carácter industrial, por lo que se prioriza su robustez para poder operar en planta y debe contar con una interfaz de usuario.
 
-Un servomotor es un tipo de motor eléctrico al que se le pueden controlar distintas variables de funcionamiento. Entre ellas están la posición, la velocidad, la aceleración y el torque. La solución buscada se vincula con un proyecto previo de la organización en el que se desarrolló un sistema embebido capaz de servocontrolar motores del tipo paso a paso o \textit{steppers}. Este sistema también cuenta con un puerto de comunicación \textbf{CAN}, que se agregó originalmente para poder programar y supervisar al controlador de una forma cómoda y robusta a través de una interfaz externa. El proyecto actual busca lograr las funcionalidades de dicha interfaz.  Actualmente, varios de estos motores, junto con las placas controladoras mencionadas, se encuentran en funcionamiento en la planta de la empresa \textbf{Cambre}, realizando diversos tipos de actuaciones mecánicas en líneas de manufactura. El problema que este proyecto afronta es la dificultad para alterar los parametros de control de dichos motores y la imposibilidad de supervisar el estado de funcionamiento de estos. Se elige el protocolo de comunicación \textbf{CAN} debido a su robustez y amplia utilización en el marco industrial.
+La organización \empclientename{} desarrolló un sistema embebido, llamado SN-17, capaz de controlar la posición, velocidad, aceleración y torque a motores del tipo paso a paso, también conocidos como \textit{steppers}. Actualmente, varios de estos motores, junto con las placas controladoras mencionadas, se encuentran en funcionamiento en la planta de la empresa Cambre, realizando diversos tipos de actuaciones mecánicas en líneas de manufactura.
 
-También dentro del marco de este proyecto se encuentra el desarrollo de la estructura de mensajes a emplear entre los dispositivos conectados a través de la red \textbf{CAN}. Esta debe permitir al controlador supervisar las distintas variables de interés de cada uno de los motores conectados, así como realizar cambios en las configuraciones.
+El sistema SN-17 cuenta con un problema, que es la dificultad para alterar, de forma cómoda, el funcionamiento de los motores. El firmware debe ser modificado cada vez que se quiera realizar un cambio de este estilo, lo cual limita la operabilidad. 
 
-Por otro lado, el dispositivo debe tener entradas y salidas discretas, eléctricamente aisladas y en otros niveles de tensión que permitan envíar señales a un \textbf{PLC} (\textit{Programmable Logic Controller}). Estas señales se emplearán para indicar posibles errores al controlador, así como para recibir ciertas instrucciones específicas de este.
+Dentro de este contexto es que se propone el actual proyecto. Se buscará lograr una interfaz que permita a un usuario con poco entrenamiento conectarse con los motores y modificar los parámetros de funcionamiento. Para ello, se establecerá comunicación a través de una red CAN, aprovechando que el sistema SN-17 cuenta con un puerto para este protocolo. Es necesario, entonces, diseñar un sistema de mensajeria que haga que los dispositivos puedan enviar información dentro de la red, y una interfaz gráfica que permita a usuarios realizar cambios.
 
-El equipo debe contar también con un display y una botonera, conformando el aspecto \textbf{HMI} (\textit{Human Machine Interface}) de la solución. Esto permite a un usuario operarlo y revisar el correcto funcionamiento del sistema.
+También se propone que el dispositivo actue como supervisor, una vez que los motores estén en funcionamiento. Como en la mayoría de procesos industriales suelen emplearse controladores PLC (\textit{Programmable Logic Controller}), es necesario que la solución buscada pueda interactuar con estos.
 
-En la \textbf{Figura 1} se muestra, a modo de ejemplo, un diagrama en bloques del sistema. El proyecto abarca el diseño y fabricación de la parte que aparece denominada como controlador y su interacción con los demás bloques. También notar que en el bus \textbf{CAN} pueden haber conectados más de 1 servomotor. Cada uno de estos tendrá una de las placas controladoras descriptas previamente.
+En la \textbf{Figura 1} se muestra, a modo de ejemplo, un diagrama en bloques del sistema. El proyecto abarca el diseño y fabricación de la parte que aparece denominada como controlador y su interacción con los demás bloques. También notar que en el bus CAN pueden haber conectados más de 1 servomotor. Cada uno de estos tendrá una de las placas controladoras descriptas previamente.
 
 \begin{figure}[htpb]
 \centering 
@@ -160,7 +158,7 @@ Usuario final &     Sector de armado          &Cambre              	& Operarios 
 Por ejemplo:
 \begin{itemize}
 	\item Orientador: Gabriel Gavinowich, es especialista en sistemas embebidos y trabaja en protocolo CAN, será de gran ayuda en materias de este aspecto.
-	\item Colaborador: Andrés Battisti, es hábil en la coordinación de proyectos. Puede dar una mano con la implementación en planta.
+	\item Colaborador: Andrés Battisti, es hábil en la coordinación de proyectos. Puede colaborar con la implementación en planta.
 	\item Usuario final: Sería de ayuda consultar a los operarios del sector de automatización para determinar temas de uso y de calidad que puedan considerar deseable. Pueden dar pautas para requerimientos que pueden ser de utilidad.
 \end{itemize}
 
@@ -168,7 +166,7 @@ Por ejemplo:
 \section{3. Propósito del proyecto}
 \label{sec:proposito}
 
-El propósito de este proyecto es desarrollar un sistema embebido que actúe de interfaz para configurar y supervisar servomotores conectados a una red \textbf{CAN}.
+El propósito de este proyecto es desarrollar un sistema embebido que actúe de interfaz para configurar y supervisar servomotores conectados a una red CAN.
 
 \section{4. Alcance del proyecto}
 \label{sec:alcance}
@@ -177,9 +175,9 @@ El proyecto incluye:
 
 \begin{itemize}
 	\item Una interfaz de usuario que permite configurar y supervisar los servomotores conectados.
-	\item La estructura de mensajes que ha de transmitirse a través del bus \textbf{CAN}.
-	\item La inclusión de entradas y salidas eléctricamente aisladas para comunicación con un \textbf{PLC}.
-	\item La configuración de la red \textbf{CAN}.
+	\item La estructura de mensajes que ha de transmitirse a través del bus CAN.
+	\item La inclusión de entradas y salidas eléctricamente aisladas para comunicación con un PLC.
+	\item La configuración de la red CAN.
 	\item El desarrollo y fabricación de una plaqueta que abarque al sistema.
 \end{itemize}
 
@@ -206,106 +204,224 @@ Para el desarrollo del presente proyecto se supone que:
 
 \section{6. Requerimientos}
 \label{sec:requerimientos}
-
-\begin{consigna}{red}
-Los requerimientos deben numerarse y de ser posible estar agruparlos por afinidad, por ejemplo:
+\newcommand{\leadingZeroes}[1]{%
+\ifnum #1<100{0}\fi%
+\ifnum #1<10{0}\fi%
+#1}
+%
+\newcounter{REQ}
+%
+\newcommand{\REQ}{%
+\stepcounter{REQ}%
+\textbf{[SCI-CAN-REQ{\leadingZeroes{\theREQ}]}}}
+%
 
 \begin{enumerate}
-	\item Requerimientos funcionales
-		\begin{enumerate}
-			\item El sistema debe...
-			\item Tal componente debe...
-			\item El usuario debe poder...
-		\end{enumerate}
-	\item Requerimientos de documentación
-		\begin{enumerate}
-			\item Requerimiento 1
-			\item Requerimiento 2 (prioridad menor)
-		\end{enumerate}
-	\item Requerimiento de testing...
-	\item Requerimientos de la interfaz...
-	\item Requerimientos interoperabilidad...
-	\item etc...
+	\item \textbf{Requerimientos de la red CAN:}
+	\begin{enumerate}
+			\item El sistema debe comunicarse empleando el protocolo CAN. \REQ
+			\item El sistema debe poder comunicarse con todos los motores conectados a la red CAN que posean la placa controladora SN-17. \REQ
+			\item El sistema debe poder comunicarse con hasta 5 motores conectados a la red CAN. \REQ
+			\item El sistema debe envíar y recibir información a través del puerto CAN a una tasa de al
+menos 300 kbps. \REQ
+	\end{enumerate}
+	\item \textbf{Requerimientos de comunicación:}
+	\begin{enumerate}
+		\item El sistema debe poder enviar programas a los servomotores de hasta 15 instrucciones
+de largo. \REQ
+		\item El sistema debe tener la capacidad de enviar cada una de las instrucciones de
+programa disponibles en los servomotores. Estas son: Seteo de tipo de control,
+verificación de señal de control, pausa de la señal de control, apagado de control,
+comunicación, reseteo de programa. \REQ
+		\item El sistema debe enviar, para cada instrucción, todos los atributos de configuración
+necesarios. Estos son: Selección de variable de control, seteo de variable de control,
+tiempo de cumplimiento de instrucción, tiempo de timeout, error permisible de la
+variable de control, torque máximo de motor, tipo de comunicación y mensaje. \REQ
+		\item El sistema debe poder modificar los parámetros de los lazos de control PID de los
+servomotores para los distintos tipos de control. \REQ
+		\item El sistema debe poder configurar el seteo de funcionalidades especiales de los
+motores, estas son: selección de tipo de cerado, proceso de cerado, calibración del encoder, calibración de posiciones, forma de operatividad de las salidas discretas de los motores, verificación de detención de eje. \REQ
+		\item El sistema debe permitir operar los motores en forma manual, simulando las entradas
+y forzando las salidas discretas que cada uno de los motores conectados. \REQ
+		\item El sistema deberá poder activar o desactivar a cada uno de los motores conectados. \REQ
+		\item El sistema deberá recibir de cada motor conectado el número de
+programa e instruccion en que se encuentra. \REQ
+		\item El sistema deberá recibir de cada motor conectado un reporte de
+error en caso de falla. \REQ
+	\end{enumerate}
+	\item \textbf{Requerimientos de comunicación con PLC:}
+	\begin{enumerate}
+		\item El sistema debe poder comunicarse con un controlador externo (PLC) a través de señales discretas. \REQ
+		\item Las señales al controlador externo deben estar eléctricamente aisladas, por lo menos a 1 kV, usando optoacopladores. \REQ
+		\item Las señales al controlador externo deben ser del tipo NPN. \REQ
+		\item Las señales al controlador externo deben poder ser a distinta tensión que la empleada por el microcontrolador, hasta 24V. \REQ
+		\item El sistema deberá enviar señales discretas en caso de que alguno de los motores
+conectados reporte un error. \REQ
+	\end{enumerate}
+	\item \textbf{Requerimientos de interfaz de usuario:}
+	\begin{enumerate}
+		\item El sistema debe tener una pantalla LCD y una botonera. \REQ
+		\item La pantalla LCD debe permitir acceder a las variables de los motores a través de un menú y debe recorrerse usando la botonera. \REQ
+		\item El sistema debe tener un switch que permita cambiar su forma de funcionamiento, entre configurador de motores y relevador de información. \REQ
+	\end{enumerate}
+	\item \textbf{Requerimientos de diseño:}
+	\begin{enumerate}
+		\item El sistema debe emplear el microcontrolador ATSAMC21. \REQ
+		\item El sistema debe alimentarse con 24V de tensión. \REQ
+		\item El sistema debe estar encapsulado dentro de una caja plástica. \REQ
+	\end{enumerate}
 \end{enumerate}
-
-Leyendo los requerimientos se debe poder interpretar cómo será el proyecto y su funcionalidad.
-
-Indicar claramente cuál es la prioridad entre los distintos requerimientos y si hay requerimientos opcionales. 
-
-No olvidarse de que los requerimientos incluyen a las regulaciones y normas vigentes!!!
-
-Y al escribirlos seguir las siguientes reglas:
-\begin{itemize}
-	\item Ser breve y conciso (nadie lee cosas largas). 
-	\item Ser específico: no dejar lugar a confusiones.
-	\item Expresar los requerimientos en términos que sean cuantificables y medibles.
-\end{itemize}
-
-\end{consigna}
 
 \section{7. Historias de usuarios (\textit{Product backlog})}
 \label{sec:backlog}
 
-\begin{consigna}{red}
-Descripción: En esta sección se deben incluir las historias de usuarios y su ponderación (\textit{history points}). Recordar que las historias de usuarios son descripciones cortas y simples de una característica contada desde la perspectiva de la persona que desea la nueva capacidad, generalmente un usuario o cliente del sistema. La ponderación es un número entero que representa el tamaño de la historia comparada con otras historias de similar tipo.
+En esta sección se enuncian las historias de usuario, cada una de ellas llevará un puntaje según 3 aspectos:
+\begin{itemize}
+	\item Dificultad: Cantidad de trabajo a realizar.
+	\item Complejidad: Complejidad de trabajo a realizar.
+	\item Riesgo: Incertidumbre del trabajo a realizar.
+\end{itemize}
+Se utilizará una escala siguiendo la serie de Fibonacci, donde un número mayor implica mayor costo. Si la suma de los 3 componentes no da un número de la serie, se eligirá el próximo más cercano.
 
-El formato propuesto es: "como [rol] quiero [tal cosa] para [tal otra cosa]."
-
-Se debe indicar explícitamente el criterio para calcular los \textit{story points} de cada historia
-\end{consigna}
+\begin{enumerate}
+	\item Como operario quiero detectar la presencia de errores para reportarlo a mi supervisor.
+	\begin{itemize}
+		\item D: 8.
+		\item C: 5.
+		\item R: 3.
+		\item Total: 21.
+	\end{itemize}
+	\item Como operario quiero una interfaz de usuario simple para evitar cometer errores.
+	\begin{itemize}
+		\item D: 3.
+		\item C: 1.
+		\item R: 1.
+		\item Total: 5.
+	\end{itemize}
+	\item Como trabnajador de mantenimiento quiero conocer los problemas de los actuadores para repararlos rápidamente.
+	\begin{itemize}
+		\item D: 5.
+		\item C: 5.
+		\item R: 3.
+		\item Total: 13.
+	\end{itemize}
+	\item Como desarrollador quiero controlar los actuadores para facilitar la programación.
+	\begin{itemize}
+		\item D: 3.
+		\item C: 5.
+		\item R: 3.
+		\item Total: 13.
+	\end{itemize}
+	\item Como desarrollador quiero saber el estado de funcionamiento para facilitar la programación.
+	\begin{itemize}
+		\item D: 8.
+		\item C: 5.
+		\item R: 3.
+		\item Total: 21.
+	\end{itemize}
+	\item Como programador de PLC quiero recibir señales del estado de actuadores para facilitar la programación.
+	\begin{itemize}
+		\item D: 3.
+		\item C: 3.
+		\item R: 1.
+		\item Total: 8.
+	\end{itemize}
+	\item "Como gerente de planta, quiero minimizar la cantidad de sensores para disminuir los costos.
+	\begin{itemize}
+		\item D: 3.
+		\item C: 3.
+		\item R: 3.
+		\item Total: 13.
+	\end{itemize}
+	\item Como gerente de planta, quiero que los componentes de las líneas de producción sean robustos para minimizar los tiempos de parada.
+	\begin{itemize}
+		\item D: 3.
+		\item C: 5.
+		\item R: 5.
+		\item Total: 13.
+	\end{itemize}
+	\item Como gerente de planta, quiero que los actuadores de las líneas reporten errores para minimizar mantenimiento.
+	\begin{itemize}
+		\item D: 5.
+		\item C: 5.
+		\item R: 3.
+		\item Total: 13.
+	\end{itemize}
+\end{enumerate}
 
 \section{8. Entregables principales del proyecto}
 \label{sec:entregables}
 
-\begin{consigna}{red}
-
-Los entregables del proyecto son (ejemplo):
+Los entregables del proyecto son:
 
 \begin{itemize}
+	\item Prototipo del sistema
 	\item Manual de uso
 	\item Diagrama de circuitos esquemáticos
-	\item Código fuente del firmware
+	\item Diagrama de PCB
+	\item Archivos de fabricación de PCB
 	\item Diagrama de instalación
+	\item Planos de caja
 	\item Informe final
-	\item etc...
 \end{itemize}
-
-\end{consigna}
 
 \section{9. Desglose del trabajo en tareas}
 \label{sec:wbs}
 
-\begin{consigna}{red}
-El WBS debe tener relación directa o indirecta con los requerimientos.  Son todas las actividades que se harán en el proyecto para dar cumplimiento a los requerimientos. Se recomienda mostrar el WBS mediante una lista indexada:
+A continuación se enumeran las tareas del proyecto y se detalla su carga horaria:
 
 \begin{enumerate}
-\item Grupo de tareas 1
+	\item \textbf{Planificación y gestión del proyecto (80 hs):}
 	\begin{enumerate}
-	\item Tarea 1 (tantas hs)
-	\item Tarea 2 (tantas hs)
-	\item Tarea 3 (tantas hs)
+		\item Realizar el plan de trabajo (20 hs).
+		\item Determinación de componentes (10 hs)
+		\item Realizar informes de avance (10 hs)
+		\item Confección de memoria de trabajo (30 hs)
+		\item Presentación y defensa de trabajo (10 hs)
 	\end{enumerate}
-\item Grupo de tareas 2
+	\item \textbf{Tareas de investigación (60 hs):}
 	\begin{enumerate}
-	\item Tarea 1 (tantas hs)
-	\item Tarea 2 (tantas hs)
-	\item Tarea 3 (tantas hs)
+		\item Busqueda de soluciones similares (20 hs)
+		\item Estudiar protocolo CAN (20 hs)
+		\item Examinar prestaciones del microcontrolador (10 hs)
+		\item Recopilar hojas de datos de componentes y búsqueda de librerias (10 hs)
 	\end{enumerate}
-\item Grupo de tareas 3
+	\item \textbf{Desarrollo de software (185 hs):}
 	\begin{enumerate}
-	\item Tarea 1 (tantas hs)
-	\item Tarea 2 (tantas hs)
-	\item Tarea 3 (tantas hs)
-	\item Tarea 4 (tantas hs)
-	\item Tarea 5 (tantas hs)
+		\item Integración de drivers y librerías (15 hs)
+		\item Elaboración de estructura de mensajes (30 hs)
+		\item Programación de red CAN (20 hs)
+		\item Implementación de estructura de mensajes (20 hs)
+		\item Programación de menúes (20 hs)
+		\item Desarrollo de aplicación (40 hs)
+		\item Integración de software de servomotores (40 hs)
+	\end{enumerate}
+	\textbf{\item Desarrollo de Hardware (95 hs):}
+	\begin{enumerate}
+		\item Diseño de circuitos eléctricos (30 hs)
+		\item Diseño de PCB (30 hs)
+		\item Diseño de red CAN (20 hs)
+		\item Elaboración de archivos de fabricación (15 hs)
+	\end{enumerate}
+	\textbf{\item Fabricación (65 hs):}
+	\begin{enumerate}
+		\item Compra de componentes (20 hs)
+		\item Fabricación de PCB (5 hs)
+		\item Ensamble de PCB (20 hs)
+		\item Diseño y fabricación de caja (20 hs)
+	\end{enumerate}
+	\textbf{\item Ensayos e implementación(145 hs):}
+	\begin{enumerate}
+		\item Pruebas eléctricas (15 hs)
+		\item Ensayo de comunicación (40 hs)
+		\item Ensayo de interfaz de usuario (20 hs)
+		\item Prueba de aplicación (30 hs)
+		\item Optimización y búsqueda de errores (20 hs)
+		\item Pruebas de implementación en planta (20 hs)
 	\end{enumerate}
 \end{enumerate}
 
-Cantidad total de horas: (tantas hs)
-
-Se recomienda que no haya ninguna tarea que lleve más de 40 hs. 
-
-\end{consigna}
+\textbf{Cantidad total de horas: (630 hs)}
 
 \section{10. Diagrama de Activity On Node}
 \label{sec:AoN}
