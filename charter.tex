@@ -72,7 +72,7 @@ Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios 
 1      & Se completa hasta el punto 5 inclusive                 & 30 de octubre de 2021 \\ \hline
 2      & Se completa hasta el punto 9 inclusive
 & 7 de noviembre de 2021 \\ \hline
-%3      & Se completa hasta el punto 11 inclusive                & dd/mm/aaaa \\ \hline
+3      & Se completa hasta el punto 11 inclusive                & 16 de noviembre de 2021 \\ \hline
 %4      & Se completa el plan	                                 & dd/mm/aaaa \\ \hline
 \end{tabularx}
 \end{table}
@@ -123,7 +123,7 @@ Dentro de este contexto es que se propone el actual proyecto. Se buscará lograr
 
 También se propone que el dispositivo actue como supervisor, una vez que los motores estén en funcionamiento. Como en la mayoría de procesos industriales suelen emplearse controladores PLC (\textit{Programmable Logic Controller}), es necesario que la solución buscada pueda interactuar con estos.
 
-En la \textbf{Figura 1} se muestra, a modo de ejemplo, un diagrama en bloques del sistema. El proyecto abarca el diseño y fabricación de la parte que aparece denominada como controlador y su interacción con los demás bloques. También notar que en el bus CAN pueden haber conectados más de 1 servomotor. Cada uno de estos tendrá una de las placas controladoras descriptas previamente.
+En la Figura 1 se muestra, a modo de ejemplo, un diagrama en bloques del sistema. El proyecto abarca el diseño y fabricación de la parte que aparece denominada como controlador y su interacción con los demás bloques. También notar que en el bus CAN pueden haber conectados más de 1 servomotor. Cada uno de estos tendrá una de las placas controladoras descriptas previamente.
 
 \begin{figure}[htpb]
 \centering 
@@ -185,6 +185,7 @@ El proyecto no incluye:
 
 \begin{itemize}
 	\item El acceso a los datos de funcionamiento de los servomotores de forma remota o el almacenamiento de estos en una memoria.
+	\item La asignación de IDs a los motores.
 	\item El desarrollo de las placas controladoras de los servomotores.
 	\item La implementación final en planta.
 \end{itemize}
@@ -240,7 +241,7 @@ variable de control, torque máximo de motor, tipo de comunicación y mensaje. \
 		\item El sistema debe poder modificar los parámetros de los lazos de control PID de los
 servomotores para los distintos tipos de control. \REQ
 		\item El sistema debe poder configurar el seteo de funcionalidades especiales de los
-motores, estas son: selección de tipo de cerado, proceso de cerado, calibración del encoder, calibración de posiciones, forma de operatividad de las salidas discretas de los motores, verificación de detención de eje. \REQ
+motores, estas son: selección de tipo de cerado (\textit{homing}), proceso de cerado, calibración del encoder, calibración de posiciones, forma de operatividad de las salidas discretas de los motores, verificación de detención de eje. \REQ
 		\item El sistema debe permitir operar los motores en forma manual, simulando las entradas
 y forzando las salidas discretas que cada uno de los motores conectados. \REQ
 		\item El sistema deberá poder activar o desactivar a cada uno de los motores conectados. \REQ
@@ -326,7 +327,7 @@ Se utilizará una escala siguiendo la serie de Fibonacci, donde un número mayor
 		\item R: 1.
 		\item Total: 8.
 	\end{itemize}
-	\item "Como gerente de planta, quiero minimizar la cantidad de sensores para disminuir los costos.
+	\item Como gerente de planta, quiero minimizar la cantidad de sensores para disminuir los costos.
 	\begin{itemize}
 		\item D: 3.
 		\item C: 3.
@@ -381,14 +382,14 @@ A continuación se enumeran las tareas del proyecto y se detalla su carga horari
 	\end{enumerate}
 	\item \textbf{Tareas de investigación (60 hs):}
 	\begin{enumerate}
-		\item Busqueda de soluciones similares (20 hs)
+		\item Búsqueda de soluciones similares (20 hs)
 		\item Estudiar protocolo CAN (20 hs)
 		\item Examinar prestaciones del microcontrolador (10 hs)
-		\item Recopilar hojas de datos de componentes y búsqueda de librerias (10 hs)
+		\item Recopilar hojas de datos de componentes y búsqueda de bibliotecas (10 hs)
 	\end{enumerate}
 	\item \textbf{Desarrollo de software (185 hs):}
 	\begin{enumerate}
-		\item Integración de drivers y librerías (15 hs)
+		\item Integración de drivers y bibliotecas (15 hs)
 		\item Elaboración de estructura de mensajes (30 hs)
 		\item Programación de red CAN (20 hs)
 		\item Implementación de estructura de mensajes (20 hs)
@@ -426,97 +427,42 @@ A continuación se enumeran las tareas del proyecto y se detalla su carga horari
 \section{10. Diagrama de Activity On Node}
 \label{sec:AoN}
 
-\begin{consigna}{red}
-Armar el AoN a partir del WBS definido en la etapa anterior. 
-
-%La figura \ref{fig:AoN} fue elaborada con el paquete latex tikz y pueden consultar la siguiente referencia \textit{online}:
-
-%\url{https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ:_A_Tutorial_for_Beginners_(Part_3)\%E2\%80\%94Creating_Flowcharts}
-
-\end{consigna}
+La Figura \ref{fig:AoN} muestra las actividades del proyecto desglosadas en un diagrama de Activity on Node. Se puede ver la secuencia que conecta las distintas acciones. El tiempo que se muestra representa horas de trabajo.
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=.8\textwidth]{./Figuras/AoN.png}
+\includegraphics[width=.8\textwidth]{./Figuras/GdP_AoN.png}
 \caption{Diagrama en \textit{Activity on Node}}
 \label{fig:AoN}
 \end{figure}
 
-Indicar claramente en qué unidades están expresados los tiempos.
-De ser necesario indicar los caminos semicríticos y analizar sus tiempos mediante un cuadro.
-Es recomendable usar colores y un cuadro indicativo describiendo qué representa cada color, como se muestra en el siguiente ejemplo:
-
-
-
 \section{11. Diagrama de Gantt}
 \label{sec:gantt}
 
-\begin{consigna}{red}
+En la figura \ref{fig:WBSGantt} se muestra el esquema de desglose de trabajo y en la figura \ref{fig:diagGantt}, el diagrama de gantt del proyecto.
 
-Existen muchos programas y recursos \textit{online} para hacer diagramas de gantt, entre los cuales destacamos:
-
-\begin{itemize}
-\item Planner
-\item GanttProject
-\item Trello + \textit{plugins}. En el siguiente link hay un tutorial oficial: \\ \url{https://blog.trello.com/es/diagrama-de-gantt-de-un-proyecto}
-\item Creately, herramienta online colaborativa. \\\url{https://creately.com/diagram/example/ieb3p3ml/LaTeX}
-\item Se puede hacer en latex con el paquete \textit{pgfgantt}\\ \url{http://ctan.dcc.uchile.cl/graphics/pgf/contrib/pgfgantt/pgfgantt.pdf}
-\end{itemize}
-
-Pegar acá una captura de pantalla del diagrama de Gantt, cuidando que la letra sea suficientemente grande como para ser legible. 
-Si el diagrama queda demasiado ancho, se puede pegar primero la ``tabla'' del Gantt y luego pegar la parte del diagrama de barras del diagrama de Gantt.
-
-Configurar el software para que en la parte de la tabla muestre los códigos del EDT (WBS).\\
-Configurar el software para que al lado de cada barra muestre el nombre de cada tarea.\\
-Revisar que la fecha de finalización coincida con lo indicado en el Acta Constitutiva.
-
-En la figura \ref{fig:gantt}, se muestra un ejemplo de diagrama de gantt realizado con el paquete de \textit{pgfgantt}. En la plantilla pueden ver el código que lo genera y usarlo de base para construir el propio.
-
-\begin{figure}[htbp]
-\begin{center}
-\begin{ganttchart}{1}{12}
-  \gantttitle{2020}{12} \\
-  \gantttitlelist{1,...,12}{1} \\
-  \ganttgroup{Group 1}{1}{7} \\
-  \ganttbar{Task 1}{1}{2} \\
-  \ganttlinkedbar{Task 2}{3}{7} \ganttnewline
-  \ganttmilestone{Milestone o hito}{7} \ganttnewline
-  \ganttbar{Final Task}{8}{12}
-  \ganttlink{elem2}{elem3}
-  \ganttlink{elem3}{elem4}
-\end{ganttchart}
-\end{center}
-\caption{Diagrama de gantt de ejemplo}
-\label{fig:gantt}
+\begin{figure}[htpb]
+\centering 
+\includegraphics[height=0.7\textheight]{./Figuras/WBS_GdP.JPG}
+\caption{Desglose de trabajo}
+\label{fig:WBSGantt}
 \end{figure}
 
 
-\begin{landscape}
 \begin{figure}[htpb]
 \centering 
-\includegraphics[height=.85\textheight]{./Figuras/Gantt-2.png}
-\caption{Ejemplo de diagrama de Gantt rotado}
+\includegraphics[height=0.65\textheight]{./Figuras/Gantt_GdP.JPG}
+\caption{Diagrama de Gantt}
 \label{fig:diagGantt}
 \end{figure}
 
-\end{landscape}
 
-\end{consigna}
 
 
 \section{12. Presupuesto detallado del proyecto}
 \label{sec:presupuesto}
 
-\begin{consigna}{red}
-Si el proyecto es complejo entonces separarlo en partes:
-\begin{itemize}
-	\item Un total global, indicando el subtotal acumulado por cada una de las áreas.
-	\item El desglose detallado del subtotal de cada una de las áreas.
-\end{itemize}
-
-IMPORTANTE: No olvidarse de considerar los COSTOS INDIRECTOS.
-
-\end{consigna}
+En el cuadro \ref{tab:costosProyecto} se detallan los costos del proyecto.
 
 \begin{table}[htpb]
 \centering
@@ -529,24 +475,38 @@ Descripción &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Cantidad} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor unitario} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor total} \\ \hline
- &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} \\ \hline
- &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
+Horas de ingeniería &
+  \multicolumn{1}{c|}{630} &
+  \multicolumn{1}{c|}{8 U\$} &
+  \multicolumn{1}{c|}{5040 U\$} \\ \hline
+  
+Dispositivos de testing &
+  \multicolumn{1}{c|}{1} &
+  \multicolumn{1}{c|}{250 U\$} &
+  \multicolumn{1}{c|}{250 U\$} \\ \hline
+  
+Componentes electrónicos &
+  \multicolumn{1}{c|}{1} &
+  \multicolumn{1}{c|}{300 U\$} &
+  \multicolumn{1}{c|}{300 U\$} \\ \hline
+  
+Placas PCB &
+  \multicolumn{1}{c|}{1} &
+  \multicolumn{1}{c|}{150 U\$} &
+  \multicolumn{1}{c|}{150 U\$} \\ \hline  
+  
+Servomotores &
+  \multicolumn{1}{c|}{4} &
+  \multicolumn{1}{c|}{100 U\$} &
+  \multicolumn{1}{c|}{400 U\$} \\ \hline  
+
+Fabricación de caja &
+  \multicolumn{1}{c|}{1} &
+  \multicolumn{1}{c|}{50 U\$} &
+  \multicolumn{1}{c|}{50 U\$} \\ \hline 
+
 \multicolumn{3}{|c|}{SUBTOTAL} &
-  \multicolumn{1}{c|}{} \\ \hline
+  \multicolumn{1}{c|}{6190 U\$} \\ \hline
 \rowcolor[HTML]{C0C0C0} 
 \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}COSTOS INDIRECTOS} \\ \hline
 \rowcolor[HTML]{C0C0C0} 
@@ -554,24 +514,31 @@ Descripción &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Cantidad} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor unitario} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor total} \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
+  
+Horas de administración &
+  \multicolumn{1}{c|}{50} &
+  \multicolumn{1}{c|}{5 U\$} &
+  \multicolumn{1}{c|}{250 U\$} \\ \hline 
+
+Horas de uso de PC &
+  \multicolumn{1}{c|}{680} &
+  \multicolumn{1}{c|}{0.5 U\$} &
+  \multicolumn{1}{c|}{340 U\$} \\ \hline 
+  
+Horas de uso de máquinas &
+  \multicolumn{1}{c|}{40} &
+  \multicolumn{1}{c|}{2 U\$} &
+  \multicolumn{1}{c|}{80 U\$} \\ \hline 
+
 \multicolumn{3}{|c|}{SUBTOTAL} &
-  \multicolumn{1}{c|}{} \\ \hline
+  \multicolumn{1}{c|}{670 U\$} \\ \hline
 \rowcolor[HTML]{C0C0C0}
 \multicolumn{3}{|c|}{TOTAL} &
+\multicolumn{1}{c|}{6890 U\$}
    \\ \hline
 \end{tabularx}%
+\caption{Costos del proyecto}
+\label{tab:costosProyecto}
 \end{table}
 
 
