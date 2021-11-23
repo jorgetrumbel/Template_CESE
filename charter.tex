@@ -545,102 +545,212 @@ Horas de uso de máquinas &
 \section{13. Gestión de riesgos}
 \label{sec:riesgos}
 
-\begin{consigna}{red}
-a) Identificación de los riesgos (al menos cinco) y estimación de sus consecuencias:
- 
-Riesgo 1: detallar el riesgo (riesgo es algo que si ocurre altera los planes previstos de forma negativa)
+a) Riesgos identificados:
+
+Riesgo 1: No habrá stock de los componentes necesarios.
 \begin{itemize}
-	\item Severidad (S): mientras más severo, más alto es el número (usar números del 1 al 10).\\
-	Justificar el motivo por el cual se asigna determinado número de severidad (S).
-	\item Probabilidad de ocurrencia (O): mientras más probable, más alto es el número (usar del 1 al 10).\\
-	Justificar el motivo por el cual se asigna determinado número de (O). 
+	\item Severidad (S): 8. Sin los componentes no se podrá ensayar ni finalizar el proyecto.
+	\item Probabilidad de ocurrencia (O): 7. Actualmente, existe una escasez general de componentes electrónicos por motivo de la pandemia Covid-19. 
 \end{itemize}   
 
-Riesgo 2:
+Riesgo 2: El fabricante de PCBs tendrá demoras excesivas o problemas con la fabricación.
 \begin{itemize}
-	\item Severidad (S): 
-	\item Ocurrencia (O):
+	\item Severidad (S): 6. Sin la placa, solo se podrá hacer un prototipo provisorio empleando placas de desarrollo. No podrá completarse el proyecto en tiempo de forma satisfactoria
+	\item Ocurrencia (O): 2. Hay varios fabricantes, y con los que se trabajó previamente nunca hubo inconvenientes.
 \end{itemize}
 
-Riesgo 3:
+Riesgo 3: Se producirá un nuevo cierre general de actividades debido a la actual pandemia de Covid-19.
 \begin{itemize}
-	\item Severidad (S): 
-	\item Ocurrencia (O):
+	\item Severidad (S): 8. El cierre impediría la obtención de componentes en tiempo, así como la posibilidad de realizar testeos e implementaciones.
+	\item Ocurrencia (O): 4. La situación de la pandemia parece haberse estabilizado en los últimos meses.
 \end{itemize}
 
+Riesgo 4: Se perderá la relación actual con la empresa Cambre.
+\begin{itemize}
+	\item Severidad (S): 5. Se complicaría realizar testeos en planta, así como algunas facilidades para la obtención de los componentes.
+	\item Ocurrencia (O): 2. Actualmente, la relación es muy buena.
+\end{itemize}
+
+Riesgo 5: Aparecerán trabas políticas en materia aduanera, o complicaciones económicas en Argentina.
+\begin{itemize}
+	\item Severidad (S): 7. Se dificultaría conseguir los componentes y las PCB.
+	\item Ocurrencia (O): 3. Sería muy inusual que ocurriera un cambio tan repentino a nivel político.
+\end{itemize}
 
 b) Tabla de gestión de riesgos:      (El RPN se calcula como RPN=SxO)
 
 \begin{table}[htpb]
 \centering
-\begin{tabularx}{\linewidth}{@{}|X|c|c|c|c|c|c|@{}}
+\begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
 \rowcolor[HTML]{C0C0C0} 
-Riesgo & S & O & RPN & S* & O* & RPN* \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-\end{tabularx}%
+Riesgo & Severidad & Ocurrencia & RPN & Severidad* & Ocurrencia* & RPN* \\ \hline
+    1  & 8  & 7  &  56   &  6  & 4   & 24     \\ \hline
+    2  & 6  & 2  &  12   &  -  &  -  &      \\ \hline
+    3  & 8  & 4  &  32   &  6  &  3  & 18     \\ \hline
+    4  & 5  & 2  &  10   &  -  &  -  &      \\ \hline
+    5  & 7  & 3  &  21   &  -  &  -  &      \\ \hline
+\end{tabular}%
 \end{table}
 
 Criterio adoptado: 
-Se tomarán medidas de mitigación en los riesgos cuyos números de RPN sean mayores a...
+Se tomarán medidas de mitigación en los riesgos cuyos números de RPN sean mayores a 30.
 
 Nota: los valores marcados con (*) en la tabla corresponden luego de haber aplicado la mitigación.
 
 c) Plan de mitigación de los riesgos que originalmente excedían el RPN máximo establecido:
  
-Riesgo 1: plan de mitigación (si por el RPN fuera necesario elaborar un plan de mitigación).
-  Nueva asignación de S y O, con su respectiva justificación:
-  - Severidad (S): mientras más severo, más alto es el número (usar números del 1 al 10).
-          Justificar el motivo por el cual se asigna determinado número de severidad (S).
-  - Probabilidad de ocurrencia (O): mientras más probable, más alto es el número (usar del 1 al 10).
-          Justificar el motivo por el cual se asigna determinado número de (O).
-
-Riesgo 2: plan de mitigación (si por el RPN fuera necesario elaborar un plan de mitigación).
- 
-Riesgo 3: plan de mitigación (si por el RPN fuera necesario elaborar un plan de mitigación).
-
-\end{consigna}
+Riesgo 1: Se buscará determinar lo antes posible los componentes a usar y encargarlos de inmediato.
+\begin{itemize}
+  \item Severidad (S): 6. La severidad es menor ya que el problema se afrontaría antes, permitiendo no atrasarse o seleccionar otros componentes similares y diseñar a partir de estos.
+  \item Probabilidad de ocurrencia (O): 4. Si bien puede que no haya stock, se tendrá un mayor margen de tiempo en el cual se pueden conseguir los componentes.
+\end{itemize}
+  
+Riesgo 3: Similar al plan del Riesgo 1, se buscará determinar los componentes lo antes posible y encargarlos.
+\begin{itemize}
+	\item Severidad (S): 6. Teniendo los componentes en mano, el proyecto tiene menos retrasos debido a un cierre.
+  \item Probabilidad de ocurrencia (O): 3. La posibilidad de que ocurra un cierre se mantiene igual, pero la posibilidad de no tener los componentes disminuye.
+\end{itemize}
 
 
 \section{14. Gestión de la calidad}
 \label{sec:calidad}
 
-\begin{consigna}{red}
-Para cada uno de los requerimientos del proyecto indique:
+Para cada uno de los requerimientos del proyecto se enuncia el procedimiento de verificación y validación:
+
+\setcounter{REQ}{0}
 \begin{itemize} 
-\item Req \#1: copiar acá el requerimiento.
-
-\begin{itemize}
-	\item Verificación para confirmar si se cumplió con lo requerido antes de mostrar el sistema al cliente. Detallar 
-	\item Validación con el cliente para confirmar que está de acuerdo en que se cumplió con lo requerido. Detallar  
+	\item \REQ ~El sistema debe comunicarse empleando el protocolo CAN.
+	\begin{itemize}
+		\item Verificación: Se comprobará en un laboratorio que la señal cumpla lo estipulado por el protocolo.
+		\item Validación: Se conectará a un motor y se enviará un mensaje CAN.
+	\end{itemize}
+	\item \REQ ~El sistema debe poder comunicarse con todos los motores conectados a la red CAN que posean la placa controladora SN-17.
+	\begin{itemize}
+		\item Verificación: Se verá que el ID del mensaje sea el que corresponde y los filtros y máscaras actúen correctamente.
+		\item Validación: Se conectarán varios motores y se enviarán mensajes a cada uno.
+	\end{itemize}
+	\item \REQ ~El sistema debe poder comunicarse con hasta 5 motores conectados a la red CAN.
+	\begin{itemize}
+		\item Verificación: Se verá que el ID del mensaje sea el que corresponde y los filtros y mascaras actúen correctamente.
+		\item Validación: Se conectarán varios motores y se enviarán mensajes a cada uno.
+	\end{itemize}
+	\item \REQ ~El sistema debe envíar y recibir información a través del puerto CAN a una tasa de al menos 300 kbps.
+	\begin{itemize}
+		\item Verificación: Se comprobará en un laboratorio que se cumplan los tiempos de señal.
+		\item Validación: Se conectará un motor y se enviarán mensajes a la tasa estipulada.
+	\end{itemize}
+	\item \REQ ~El sistema debe poder enviar programas a los servomotores de hasta 15 instrucciones de largo.
+	\begin{itemize}
+		\item Verificación: Se verá que el mensaje pueda indicar correctamente el número de instrucción con 4 bits.
+		\item Validación: Se enviará a un motor un programa con 15 instrucciones.
+	\end{itemize}
+	\item \REQ ~El sistema debe tener la capacidad de enviar cada una de las instrucciones de programa disponibles en los servomotores. Estas son: Seteo de tipo de control, verificación de señal de control, pausa de la señal de control, apagado de control, comunicación, reseteo de programa.
+	\begin{itemize}
+		\item Verificación: Se verá que el mensaje pueda indicar correctamente la instrucción.
+		\item Validación: Se enviará a un motor cada una de las instrucciones.
+	\end{itemize}
+	\item \REQ ~El sistema debe enviar, para cada instrucción, todos los atributos de configuración necesarios. Estos son: Selección de variable de control, seteo de variable de control, tiempo de cumplimiento de instrucción, tiempo de timeout, error permisible de la variable de control, torque máximo de motor, tipo de comunicación y mensaje.
+	\begin{itemize}
+		\item Verificación: Se verá que el mensaje pueda indicar correctamente la instrucción.
+		\item Validación: Se enviará a un motor cada una de las instrucciones.
+	\end{itemize}
+	\item \REQ ~El sistema debe poder modificar los parámetros de los lazos de control PID de los servomotores para los distintos tipos de control.
+	\begin{itemize}
+		\item Verificación: Se verá que el mensaje pueda indicar correctamente la configuración.
+		\item Validación: Se enviará a un motor cada una de las configuraciones.
+	\end{itemize}
+	\item \REQ ~El sistema debe poder configurar el seteo de funcionalidades especiales de los motores, estas son: selección de tipo de cerado (\textit{homing}), proceso de cerado, calibración del encoder, calibración de posiciones, forma de operatividad de las salidas discretas de los motores, verificación de detención de eje.
+	\begin{itemize}
+		\item Verificación: Se verá que el mensaje pueda indicar correctamente la funcionalidad.
+		\item Validación: Se enviará a un motor cada una de las funcionalidades.
+	\end{itemize}
+	\item \REQ ~El sistema debe permitir operar los motores en forma manual, simulando las entradas y forzando las salidas discretas que cada uno de los motores conectados.
+	\begin{itemize}
+		\item Verificación: Se verá que el mensaje pueda indicar correctamente la IO a operar.
+		\item Validación: Se enviará a un motor cada una de las IO.
+	\end{itemize}
+	\item \REQ ~El sistema deberá poder activar o desactivar a cada uno de los motores conectados.
+	\begin{itemize}
+		\item Verificación: Se verá que el mensaje pueda indicar correctamente el motor a activar/desactivar.
+		\item Validación: Se enviará a varios motores conectados una señal de activado y desactivado.
+	\end{itemize}
+	\item \REQ ~El sistema deberá recibir de cada motor conectado el número de programa e instruccion en que se encuentra.
+	\begin{itemize}
+		\item Verificación: Se verá que el mensaje pueda indicar el número de programa e instrucción
+		\item Validación: Se conectará un motor en funcionamiento y se comprobará el estado de este a través de la pantalla.
+	\end{itemize}
+	\item \REQ ~El sistema deberá recibir de cada motor conectado un reporte de error en caso de falla.
+	\begin{itemize}
+		\item Verificación: Se verá que el mensaje pueda indicar correctamente el error.
+		\item Validación: Se conectará un motor en funcionamiento y se comprobará el estado de error a través de la pantalla.
+	\end{itemize}
+	\item \REQ ~El sistema debe poder comunicarse con un controlador externo (PLC) a través de señales discretas.
+	\begin{itemize}
+		\item Verificación: Se verá en un laboratorio que el sistema pueda recibir y enviar señales discretas.
+		\item Validación: Se conectará un PLC que enviará señales discretas y se comprobará el funcionamiento a través de la pantalla.
+	\end{itemize}
+	\item \REQ ~Las señales al controlador externo deben estar eléctricamente aisladas, por lo menos a 1 kV, usando optoacopladores.
+	\begin{itemize}
+		\item Verificación: Se verá el datasheet de los optoacopladores empleados y se comprobaran las distancias de aislación eléctrica en la PCB.
+		\item Validación: Se hará un ensayo de sobretensión en el sistema.
+	\end{itemize}
+	\item \REQ ~Las señales al controlador externo deben ser del tipo NPN.
+	\begin{itemize}
+		\item Verificación: Se comprobarán los esquemáticos de los PCB y los componentes seleccionados.
+		\item Validación: Se hará una demostración con instrumentos de medición de tipo de salida.
+	\end{itemize}
+	\item \REQ ~Las señales al controlador externo deben poder ser a distinta tensión que la empleada por el microcontrolador, hasta 24V.
+	\begin{itemize}
+		\item Verificación: Se comprobarán los esquemáticos de los PCB y los componentes seleccionados.
+		\item Validación: Se conectará un PLC que trabaje a 24V y se enviarán señales que comprueben el funcionamiento.
+	\end{itemize}
+	\item \REQ ~El sistema deberá enviar señales discretas en caso de que alguno de los motores conectados reporte un error.
+	\begin{itemize}
+		\item Verificación: Se verá en el código que se cumpla la funcionalidad requerida.
+		\item Validación: Se conectará un motor y un PLC y se forzará una situación de error.
+	\end{itemize}
+	\item \REQ ~El sistema debe tener una pantalla LCD y una botonera.
+	\begin{itemize}
+		\item Verificación: Se comprobarán los componentes empleados.
+		\item Validación: Se comprobará la conformación del sistema.
+	\end{itemize}
+	\item \REQ ~La pantalla LCD debe permitir acceder a las variables de los motores a través de un menú y debe recorrerse usando la botonera. 
+	\begin{itemize}
+		\item Verificación: Se comprobará el codigo del sistema.
+		\item Validación: Se realizará una prueba de funcionamiento.
+	\end{itemize}
+	\item \REQ ~El sistema debe tener un switch que permita cambiar su forma de funcionamiento, entre configurador de motores y relevador de información.
+	\begin{itemize}
+		\item Verificación: Se comprobará el codigo del sistema.
+		\item Validación: Se realizará una prueba de funcionamiento.
+	\end{itemize}
+	\item \REQ ~El sistema debe emplear el microcontrolador ATSAMC21.
+	\begin{itemize}
+		\item Verificación: Se comprobará el uso del componente.
+		\item Validación: Se comprobará el uso del componente.
+	\end{itemize}
+	\item \REQ ~El sistema debe alimentarse con 24V de tensión.
+	\begin{itemize}
+		\item Verificación: Se comprobarán los esquemáticos y los componentes elegidos.
+		\item Validación: Se conectará el sistema a 24V y se verá su funcionamiento.
+	\end{itemize}
+	\item \REQ ~El sistema debe estar encapsulado dentro de una caja plástica.
+	\begin{itemize}
+		\item Verificación: Se comprobarán los dibujos y planos mecánicos del sistema.
+		\item Validación: Se verá la presentación del sistema.
+	\end{itemize}
 \end{itemize}
-
-\end{itemize}
-
-Tener en cuenta que en este contexto se pueden mencionar simulaciones, cálculos, revisión de hojas de datos, consulta con expertos, mediciones, etc.  Las acciones de verificación suelen considerar al entregable como ``caja blanca'', es decir se conoce en profundidad su funcionamiento interno.  En cambio, las acciones de validación suelen considerar al entregable como ``caja negra'', es decir, que no se conocen los detalles de su funcionamiento interno.
-
-\end{consigna}
-
+		
 \section{15. Procesos de cierre}    
 \label{sec:cierre}
 
-\begin{consigna}{red}
-Establecer las pautas de trabajo para realizar una reunión final de evaluación del proyecto, tal que contemple las siguientes actividades:
+A continuación se enuncian cuáles serán las actividades de cierre del proyecto y quien será el encargado de su organización:
 
 \begin{itemize}
-	\item Pautas de trabajo que se seguirán para analizar si se respetó el Plan de Proyecto original:
-	 - Indicar quién se ocupará de hacer esto y cuál será el procedimiento a aplicar. 
-	\item Identificación de las técnicas y procedimientos útiles e inútiles que se emplearon, y los problemas que surgieron y cómo se solucionaron:
-	 - Indicar quién se ocupará de hacer esto y cuál será el procedimiento para dejar registro.
-	\item Indicar quién organizará el acto de agradecimiento a todos los interesados, y en especial al equipo de trabajo y colaboradores:
-	  - Indicar esto y quién financiará los gastos correspondientes.
+	\item Reunión de evaluación de proyecto: A realizar con \supname , director del trabajo. Se estudiará en que medida se respetó el plan de proyecto original, comparando con los resultados obtenidos. También se evaluarán las técnicas emlpeadas y se las distinguirá entre eficientes e ineficientes, según si ayudaron a que el proyecto se realice en tiempo y cumpliendo las pautas de calidad y riesgo. Se escribirá un documento que detalle las conclusiones de dicha reunión, como referencia para proyectos futuros. (Encargado: \authorname) 
+	\item Reunión de agradecimiento: A realizar con \supname , director del trabajo y los colaboradores de Cambre, que ayuden en la implementación en planta. (Encargado: \authorname)
 \end{itemize}
-
-\end{consigna}
 
 
 \end{document}
